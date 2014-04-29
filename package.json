@@ -1,6 +1,6 @@
 {
   "name": "grunt-set-app-mode",
-  "description": "Sets application mode by copying, e.g. config.production.js to config.js",
+  "description": "Sets application mode in build by copying, e.g., config.production.js to config.js",
   "version": "0.1.0",
   "homepage": "https://github.com/cfogelberg/grunt-set-app-mode",
   "author": {
@@ -31,6 +31,7 @@
     "grunt-contrib-jshint": "^0.9.2",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-copy": "^0.5.0",
     "grunt": "~0.4.4"
   },
   "peerDependencies": {

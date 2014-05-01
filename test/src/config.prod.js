@@ -1,0 +1,3 @@
+imodule.exports = {
+  mode: "prod"
+};

@@ -2,14 +2,26 @@
 
 describe("end-to-end tests", function() {
   var grunt = require("grunt");
-  var should = require("should");;
+  var should = require("should");
+  var GruntSetAppMode = require("../lib/set_app_mode");
 
   function content_of(file_a) {
     return false;
   };
 
-  describe.skip("build with valid mode creates output", function() {
-    var configValid = {
+
+  it("registers itself with grunt", function() {
+      should.exist(GruntSetAppMode.registerWithGrunt);
+
+      GruntSetAppMode.registerWithGrunt(grunt);
+
+      // Check that it registered
+      should.exist(grunt.task._tasks[GruntSetAppMode.taskName]);
+      grunt.task._tasks[GruntSetAppMode.taskName].info.should.equal(GruntSetAppMode.taskDescription);
+  });
+
+  it.skip("builds with valid mode creates output", function() {
+    var config_valid = {
       files: [
         {
           src: ["test/src/config.{{MODE}}.js"],
@@ -18,15 +30,15 @@ describe("end-to-end tests", function() {
       ]
     };
 
-    var set_task = new GruntSetAppMode(config);
+    var set_task = new GruntSetAppMode(config_valid);
     grunt.task.run(set_task);
     var file_a = content_of("test/src/config.dev.js");
     var file_b = content_of("tmp/config.js");
     file_a.should.eql.file_b;
   });
 
-  describe.skip("build with invalid mode fails task", function() {
-    var configValid = {
+  it.skip("build with invalid mode fails task", function() {
+    var config_valid = {
       files: [
         {
           src: ["test/src/config.{{MODE}}.js"],
@@ -40,7 +52,7 @@ describe("end-to-end tests", function() {
     // ASSERT task failed - how does grunt notify of task failure?
   });
 
-  describe.skip("missing dest in configuration files array object element fails task", function() {
+  it.skip("missing dest in configuration files array object element fails task", function() {
     var config_no_src = {
       files: [
         {
@@ -52,7 +64,7 @@ describe("end-to-end tests", function() {
     // this.requiresConfig inside a task...
   });
 
-  describe.skip("missing src in configuration files array object element fails task", function() {
+  it.skip("missing src in configuration files array object element fails task", function() {
     var config_no_src = {
       files: [
         {
@@ -64,7 +76,7 @@ describe("end-to-end tests", function() {
     // test this.requiresConfig inside a task
   });
 
-  describe.skip("specifying no objects in configuration files array raises warning", function() {
+  it.skip("specifying no objects in configuration files array raises warning", function() {
     var config_no_entries = {
       files: [
       ]
@@ -73,7 +85,7 @@ describe("end-to-end tests", function() {
     // this inside a task
   });
 
-  describe.skip("specifying no configuration files array raises warning", function() {
+  it.skip("specifying no configuration files array raises warning", function() {
     var config_no_entries = {
     };
 

@@ -1,27 +1,7 @@
 module.exports = function(grunt) {
-  var _ = require("underscore");
-
-  var build_tasks = _.filter(grunt.cli.tasks, function(arg) {
-    return arg.indexOf("build:") !== -1;
-  });
-  var build_modes = _.map(build_tasks, function(task) {
-    return task.substring(task.indexOf(":") + 1);
-  });
-  if(build_modes.length > 1) {
-    grunt.log.error("Multiple build tasks specified: " + JSON.stringify(build_tasks));
-  }
-  else {
-    var build_mode = build_modes[0];
-  }
-
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
-    // Configuration files and variables
-    pkg: grunt.file.readJSON("package.json"),
-    app_info: grunt.file.readJSON("app_info.json"),
-    build_mode: build_mode,
-
     clean: {
       total: {
         src: [ "build" ]
@@ -55,7 +35,5 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask("build:dev", ["clean:total", "copy:build", "set_app_mode"]);
-  grunt.registerTask("build:staging", ["clean:total", "copy:build", "set_app_mode"]);
-  grunt.registerTask("build:prod", ["clean:total", "copy:build", "set_app_mode"]);
+  grunt.registerTask("build", ["clean:total", "copy:build", "set_app_mode"]);
 };

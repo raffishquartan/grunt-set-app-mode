@@ -1,3 +1,3 @@
-imodule.exports = {
+module.exports = {
   mode: "prod"
 };

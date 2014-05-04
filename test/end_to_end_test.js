@@ -10,6 +10,7 @@ describe("end-to-end tests", function() {
   };
 
 
+
   it("registers itself with grunt", function() {
       should.exist(GruntSetAppMode.registerWithGrunt);
 
@@ -20,8 +21,11 @@ describe("end-to-end tests", function() {
       grunt.task._tasks[GruntSetAppMode.taskName].info.should.equal(GruntSetAppMode.taskDescription);
   });
 
-  it.skip("builds with valid mode creates output", function() {
+  it.skip("copies target-specific mode file and removes other with valid config and target mode", function() {
     var config_valid = {
+      options: {
+        expected_modes: [ "dev", "staging", "prod" ]
+      },
       files: [
         {
           src: ["test/src/config.{{MODE}}.js"],
@@ -37,8 +41,11 @@ describe("end-to-end tests", function() {
     file_a.should.eql.file_b;
   });
 
-  it.skip("build with invalid mode fails task", function() {
+  it.skip("fails task when built with invalid target mode", function() {
     var config_valid = {
+      options: {
+        expected_modes: [ "dev", "staging", "prod" ]
+      },
       files: [
         {
           src: ["test/src/config.{{MODE}}.js"],
@@ -47,13 +54,30 @@ describe("end-to-end tests", function() {
       ]
     };
 
-    var set_task = GruntSetAppMode(config);
+    var set_task = new GruntSetAppMode(config_valid);
     grunt.task.run(set_task);
     // ASSERT task failed - how does grunt notify of task failure?
   });
 
-  it.skip("missing dest in configuration files array object element fails task", function() {
+  it.skip("fails task when target mode is not set", function() {
+    // THIS TEST DOES NOT WORK YET - don't build task
+    var config_no_entries = {
+      options: {
+        expected_mode: [ "dev", "staging", "prod" ]
+      }
+    };
+
+    GruntSetAppMode.registerWithGrunt(grunt);
+    var set_task = new GruntSetAppMode(config_no_entries);
+    grunt.task.run(set_task);
+    // this inside a task
+  });
+
+  it.skip("fails task when a configuration files array object element is missing the dest", function() {
     var config_no_src = {
+      options: {
+        expected_modes: [ "dev", "staging", "prod" ]
+      },
       files: [
         {
           src: ["test/src/config.{{MODE}}.js"]
@@ -64,8 +88,11 @@ describe("end-to-end tests", function() {
     // this.requiresConfig inside a task...
   });
 
-  it.skip("missing src in configuration files array object element fails task", function() {
+  it.skip("fails task when a configuration files array object element is missing the src", function() {
     var config_no_src = {
+      options: {
+        expected_modes: [ "dev", "staging", "prod" ]
+      },
       files: [
         {
           dest: ["tmp"]
@@ -76,8 +103,11 @@ describe("end-to-end tests", function() {
     // test this.requiresConfig inside a task
   });
 
-  it.skip("specifying no objects in configuration files array raises warning", function() {
+  it.skip("raises warning when configuration files array is empty", function() {
     var config_no_entries = {
+      options: {
+        expected_modes: [ "dev", "staging", "prod" ]
+      },
       files: [
       ]
     };
@@ -85,10 +115,17 @@ describe("end-to-end tests", function() {
     // this inside a task
   });
 
-  it.skip("specifying no configuration files array raises warning", function() {
+  it.skip("raises warning when configuration does not specify any files array", function() {
+    // THIS TEST DOES NOT WORK YET - don't build task
     var config_no_entries = {
+      options: {
+        expected_modes: [ "dev", "staging", "prod" ]
+      }
     };
 
+    GruntSetAppMode.registerWithGrunt(grunt);
+    var set_task = new GruntSetAppMode(config_no_entries);
+    grunt.task.run(set_task);
     // this inside a task
   });
 });

@@ -1,27 +1,9 @@
-module.exports = function(grunt) {
-  var _ = require("underscore");
-  var build_tasks = _.filter(grunt.cli.tasks, function(arg) {
-    return arg.indexOf("build:") !== -1;
-  });
-  var build_modes = _.map(build_tasks, function(task) {
-    return task.substring(task.indexOf(":") + 1);
-  });
-  if(build_modes.length > 1) {
-    grunt.log.error("Multiple build tasks specified: " + JSON.stringify(build_tasks));
-  }
-  else {
-    var build_mode = build_modes[0];
-  }
+module.exports = function(grunt) {;
 
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
+  var mode = grunt.option('mode') || 'dev'
   grunt.initConfig({
-  	// Configuration files and variables
-    pkg: grunt.file.readJSON("package.json"),
-  	app_info: grunt.file.readJSON("app_info.json"),
-  	build_mode: build_mode,
-
-  	// Plugin tasks
 	  clean: {
 			total: {
 			  src: [ "build" ]
@@ -31,7 +13,6 @@ module.exports = function(grunt) {
 			}
   	},
 
-  	// TODO: Fix grunt-contrib-copy/tasks/copy.js - mode not set and defaults to false, default it to true
 	  copy: {
 	    build: {
 		    cwd: "src",
@@ -85,10 +66,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask("build:dev", ["clean:total", "copy:build", "copy:config_dev", "copy:override_dev",
-    "clean:tidy"]);
-  grunt.registerTask("build:staging", ["clean:total", "copy:build", "copy:config_staging",
-    "copy:override_staging", "clean:tidy"]);
-  grunt.registerTask("build:prod", ["clean:total", "copy:build", "copy:config_prod", "copy:override_prod",
+  grunt.registerTask("build", ["clean:total", "copy:build", "copy:config_" + mode, "copy:override_" + mode,
     "clean:tidy"]);
 };

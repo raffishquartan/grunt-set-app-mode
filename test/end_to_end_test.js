@@ -1,131 +1,57 @@
 "use strict";
 
-describe("end-to-end tests", function() {
-  var grunt = require("grunt");
+describe("end-to-end tests (grunt)", function() {
+  var grunt; // require before each test to ensure it is fresh
   var should = require("should");
   var GruntSetAppMode = require("../lib/set_app_mode");
 
-  function content_of(file_a) {
-    return false;
+  function get_test_configuration() {
+    return {
+      set_app_mode: {
+        options: {
+          mode: "dev" // hard code target mode, expected_modes defaults to dev, staing, prod
+        },
+        files: [
+          {
+            src: ["src/config.{{MODE}}.js"],
+            dest: ["tmp"]
+          }
+        ]
+      }
+    };
   };
+
+  function load_file_contents(filepath) {
+    return grunt.file.exists(filepath) ? grunt.file.read(filepath) : undefined;
+  }
+
+
+
+  beforeEach(function() {
+    grunt = require("grunt");
+    grunt.file.delete("tmp");
+  });
 
 
 
   it("registers itself with grunt", function() {
       should.exist(GruntSetAppMode.registerWithGrunt);
-
       GruntSetAppMode.registerWithGrunt(grunt);
-
-      // Check that it registered
       should.exist(grunt.task._tasks[GruntSetAppMode.taskName]);
       grunt.task._tasks[GruntSetAppMode.taskName].info.should.equal(GruntSetAppMode.taskDescription);
   });
 
-  it.skip("copies target-specific mode file and removes other with valid config and target mode", function() {
-    var config_valid = {
-      options: {
-        expected_modes: [ "dev", "staging", "prod" ]
-      },
-      files: [
-        {
-          src: ["test/src/config.{{MODE}}.js"],
-          dest: ["tmp"]
-        }
-      ]
-    };
-
-    var set_task = new GruntSetAppMode(config_valid);
-    grunt.task.run(set_task);
-    var file_a = content_of("test/src/config.dev.js");
-    var file_b = content_of("tmp/config.js");
-    file_a.should.eql.file_b;
-  });
-
-  it.skip("fails task when built with invalid target mode", function() {
-    var config_valid = {
-      options: {
-        expected_modes: [ "dev", "staging", "prod" ]
-      },
-      files: [
-        {
-          src: ["test/src/config.{{MODE}}.js"],
-          dest: ["tmp"]
-        }
-      ]
-    };
-
-    var set_task = new GruntSetAppMode(config_valid);
-    grunt.task.run(set_task);
-    // ASSERT task failed - how does grunt notify of task failure?
-  });
-
-  it.skip("fails task when target mode is not set", function() {
-    // THIS TEST DOES NOT WORK YET - don't build task
-    var config_no_entries = {
-      options: {
-        expected_mode: [ "dev", "staging", "prod" ]
-      }
-    };
-
+  it("copies target-specific mode file and removes mode-specific files", function() {
     GruntSetAppMode.registerWithGrunt(grunt);
-    var set_task = new GruntSetAppMode(config_no_entries);
-    grunt.task.run(set_task);
-    // this inside a task
-  });
+    grunt.initConfig(get_test_configuration());
+    grunt.task.run("set_app_mode");
 
-  it.skip("fails task when a configuration files array object element is missing the dest", function() {
-    var config_no_src = {
-      options: {
-        expected_modes: [ "dev", "staging", "prod" ]
-      },
-      files: [
-        {
-          src: ["test/src/config.{{MODE}}.js"]
-        }
-      ]
-    };
-
-    // this.requiresConfig inside a task...
-  });
-
-  it.skip("fails task when a configuration files array object element is missing the src", function() {
-    var config_no_src = {
-      options: {
-        expected_modes: [ "dev", "staging", "prod" ]
-      },
-      files: [
-        {
-          dest: ["tmp"]
-        }
-      ]
-    };
-
-    // test this.requiresConfig inside a task
-  });
-
-  it.skip("raises warning when configuration files array is empty", function() {
-    var config_no_entries = {
-      options: {
-        expected_modes: [ "dev", "staging", "prod" ]
-      },
-      files: [
-      ]
-    };
-
-    // this inside a task
-  });
-
-  it.skip("raises warning when configuration does not specify any files array", function() {
-    // THIS TEST DOES NOT WORK YET - don't build task
-    var config_no_entries = {
-      options: {
-        expected_modes: [ "dev", "staging", "prod" ]
-      }
-    };
-
-    GruntSetAppMode.registerWithGrunt(grunt);
-    var set_task = new GruntSetAppMode(config_no_entries);
-    grunt.task.run(set_task);
-    // this inside a task
+    grunt.file.exists("src/config.dev.js").should.equal(false, "tmp/config.dev.js should not exist");
+    grunt.file.exists("src/src/config.staging.js").should.equal(false, "tmp/config.staging.js should not exist");
+    grunt.file.exists("src/config.prod.js").should.equal(false, "tmp/config.prod.js should not exist");
+    grunt.file.exists("tmp/config.js").should.equal(true, "tmp/config.js does not exist");
+    var content_of_src = load_file_contents("src/config.dev.js");
+    var content_of_dest = load_file_contents("tmp/config.js");
+    content_of_src.should.equal(content_of_dest, "tmp/config.js contents should equal src/config.dev.js contents");
   });
 });

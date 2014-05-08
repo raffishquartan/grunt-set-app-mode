@@ -6,7 +6,7 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+"use strict";
 
-var set_app_mode_task = require("../lib/set_app_mode.js");
-module.exports = set_app_mode_task.register_with_grunt;
+var grunt_set_app_mode_task = require("../lib/grunt_set_app_mode.js");
+module.exports = grunt_set_app_mode_task.register_with_grunt;

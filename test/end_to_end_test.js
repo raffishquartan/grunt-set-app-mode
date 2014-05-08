@@ -1,9 +1,9 @@
 "use strict";
 
 describe("end-to-end tests (grunt)", function() {
-  var grunt; // require before each test to ensure it is fresh
   var should = require("should");
-  var GruntSetAppMode = require("../lib/set_app_mode");
+  var grunt; // require before each test to ensure it is fresh
+  var GruntSetAppMode = require("../lib/grunt_set_app_mode");
 
   function get_test_configuration() {
     return {

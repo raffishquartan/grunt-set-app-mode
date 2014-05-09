@@ -19,19 +19,19 @@ module.exports = function(grunt) {
     },
 
     set_app_mode: {
-      options: {
+      set: {
         expected_modes: [ "dev", "staging", "prod" ]
-      },
-      files: [
-        {
-          src: "src/server/config.{{MODE}}.js",
-          dest: "build/server"
-        },
-        {
-          src: "src/scripts/upstart/simple-error-server.{{MODE}}.override"
-          dest: "build/scripts/upstart"
-        }
-      ]
+        files: [
+          {
+            src: "src/server/config.{{MODE}}.js",
+            dest: "build/server"
+          },
+          {
+            src: "src/scripts/upstart/simple-error-server.{{MODE}}.override",
+            dest: "build/scripts/upstart"
+          }
+        ]
+      }
     }
   });
 

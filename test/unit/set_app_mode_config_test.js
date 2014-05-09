@@ -1,7 +1,6 @@
 "use strict";
 
 describe("SetAppModeConfig unit tests", function() {
-  var _ = require("underscore");
   var should = require("should");
   var SetAppModeConfig = require("../../lib/set_app_mode_config");
 
@@ -48,7 +47,7 @@ describe("SetAppModeConfig unit tests", function() {
 
   it("stores the correct expected_modes when using VALID_CONFIGURATION", function() {
     var config = new SetAppModeConfig(VALID_CONFIGURATION);
-    _.each(VALID_EXPECTED_MODES, function(a_valid_mode) {
+    VALID_EXPECTED_MODES.forEach(function(a_valid_mode) {
       config.get_expected_modes().should.containEql(a_valid_mode);
     });
   });

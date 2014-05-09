@@ -14,37 +14,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
       all: [
-        "Gruntfile.js",
-        "tasks/*.js",
-        "<%= nodeunit.tests %>",
+        "**/*.js"
       ],
       options: {
         jshintrc: ".jshintrc",
-      },
-    },
-
-    // Before generating any new files, remove any previously-created files.
-    clean: {
-      tests: ["tmp"],
-    },
-
-    // Configuration to be run (and then tested).
-    set_app_mode: {
-      default_options: {
-        options: {
-        },
-        files: {
-          "tmp/default_options": ["test/fixtures/testing", "test/fixtures/123"],
-        },
-      },
-      custom_options: {
-        options: {
-          separator: ": ",
-          punctuation: " !!!",
-        },
-        files: {
-          "tmp/custom_options": ["test/fixtures/testing", "test/fixtures/123"],
-        },
       },
     },
 
@@ -64,7 +37,6 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-nodeunit");
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-mocha-test");

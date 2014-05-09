@@ -36,12 +36,13 @@ describe("end-to-end tests (grunt)", function() {
 
 
   it("registers itself with grunt", function() {
-      should.exist(GruntSetAppMode.registerWithGrunt);
-      GruntSetAppMode.registerWithGrunt(grunt);
-      should.exist(grunt.task._tasks[GruntSetAppMode.taskName]);
-      grunt.task._tasks[GruntSetAppMode.taskName].info.should.equal(GruntSetAppMode.taskDescription);
+    should.exist(GruntSetAppMode.registerWithGrunt);
+    GruntSetAppMode.registerWithGrunt(grunt);
+    should.exist(grunt.task._tasks[GruntSetAppMode.taskName]);
+    grunt.task._tasks[GruntSetAppMode.taskName].info.should.equal(GruntSetAppMode.taskDescription);
   });
 
+  // TODO: Get the mochaTest task to wait on set_app_mode to finish (currently queuing runs it after by default)
   it.skip("copies target-specific mode file and removes mode-specific files", function() {
     GruntSetAppMode.registerWithGrunt(grunt);
     grunt.initConfig(TEST_CONFIGURATION);

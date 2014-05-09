@@ -1,9 +1,8 @@
-var _ = require("underscore");
 var grunt = require("grunt");
 
 var validators = {
   check_final_result: function(expected_modes, prefix, mode, dest_dir, src_dir) {
-    _.each(expected_modes, function(a_mode) {
+    expected_modes.forEach(function(a_mode) {
       var invalid_filepath = dest_dir + "/" + prefix + "." + a_mode + ".js"
       grunt.file.exists(invalid_filepath).should.equal(false, invalid_filepath + " should not exist");
     });

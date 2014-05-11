@@ -8,7 +8,7 @@
 
 "use strict";
 
-describe("ModeGroupGonfigCollection", function() {
+describe("ModeGroupConfigCollection", function() {
   var should = require("should");
   var ModeGroupConfig = require("../../lib/mode_group_config");
   var ModeGroupConfigCollection = require("../../lib/mode_group_config_collection");
@@ -33,6 +33,7 @@ describe("ModeGroupGonfigCollection", function() {
     }
   }
   var VALID_FILES_ARRAY_METAL = [ MODE_GROUP_CONFIG_A, MODE_GROUP_CONFIG_B ];
+  var EMPTY_FILES_ARRAY = [];
 
 
 
@@ -55,5 +56,11 @@ describe("ModeGroupGonfigCollection", function() {
 
     mgcc.get(0).should.eql(mode_group_config_a);
     mgcc.get(1).should.eql(mode_group_config_b);
+  });
+
+  it("throws error when files array is empty", function() {
+    (function() {
+      var exec = new ModeGroupConfigCollection(EMPTY_FILES_ARRAY, EXPECTED_MODES_METAL);
+    }).should.throw();
   });
 });

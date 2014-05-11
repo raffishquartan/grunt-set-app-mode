@@ -1,7 +1,21 @@
 var grunt = require("grunt");
 
-var validators = {
+function load_file_contents(filepath) {
+  if(grunt.file.exists(filepath)) {
+    return grunt.file.read(filepath);
+  }
+  else {
+    throw new Error(filepath + " does not exist");
+  }
+};
+
+var Validators = {
   check_final_result: function(expected_modes, prefix, mode, dest_dir, src_dir) {
+    if(expected_modes === undefined || prefix === undefined || mode === undefined || dest_dir === undefined ||
+      src_dir === undefined) {
+      throw new Error("Error: One of Valiators.check_final_result parameters is undefined");
+    }
+
     expected_modes.forEach(function(a_mode) {
       var invalid_filepath = dest_dir + "/" + prefix + "." + a_mode + ".js"
       grunt.file.exists(invalid_filepath).should.equal(false, invalid_filepath + " should not exist");
@@ -17,4 +31,4 @@ var validators = {
   }
 };
 
-module.exports = validators;
+module.exports = Validators;

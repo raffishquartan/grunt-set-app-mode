@@ -1,6 +1,6 @@
 {
   "name": "grunt-set-app-mode",
-  "description": "Sets application mode in build by copying, e.g., config.prod.js to config.js",
+  "description": "Deploys run mode-specific files, e.g. src/config.staging.js to build/config.js",
   "version": "0.1.0",
   "homepage": "https://github.com/cfogelberg/grunt-set-app-mode",
   "author": {
@@ -30,9 +30,6 @@
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-jshint": "^0.9.2",
-    "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-nodeunit": "^0.3.3",
-    "grunt-contrib-copy": "^0.5.0",
     "grunt-mocha-test": "^0.10.2",
     "should": "^3.3.1"
   },
@@ -40,6 +37,8 @@
     "grunt": "~0.4.4"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "grunt",
+    "build"
   ]
 }

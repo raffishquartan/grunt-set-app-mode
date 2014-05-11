@@ -1,10 +1,10 @@
 # grunt-set-app-mode
 
-> Sets application mode on build by copying the build mode specific file (e.g. config.prod.js, config.dev.js) to a destination target (e.g. config.js)
+> Deploys run mode-specific files, e.g. src/config.staging.js to build/config.js
 
-It is a problem if code for one run mode (dev, staging, prod) runs in another - at the very least, the databases and user credentials can be different. One way of avoiding this problem is using run mode-specific configuration files which specify the relevant details.
+It is a problem if code for one run mode (dev) runs in another (prod). At the very least, the databases and user credentials can be different. One way of avoiding this problem is using run mode-specific configuration files which specify the relevant details.
 
-This Grunt plugin simplifies deploying these files (the alternative is a mess of copy and clean tasks and a more confusing Gruntfile). See `example-gruntfile/Gruntfile.orig.js` and `example-gruntfile/Gruntfile.set-app-mode.js` for an example of how the `grunt-set-app-mode` plugin can simplify a Gruntfile and make its intent clearer.
+This Grunt plugin simplifies deploying these files and also ensures that stray source files (config.dev.js, config.prod.js etc) also aren't present in the built project. The alternative is a mess of copy and clean tasks and a more confusing Gruntfile. See `example-gruntfile/Gruntfile.orig.js` and `example-gruntfile/Gruntfile.set-app-mode.js` for an example of how the `grunt-set-app-mode` plugin can simplify a Gruntfile and make its intent clearer.
 
 
 ## Getting Started

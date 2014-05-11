@@ -58,8 +58,6 @@ describe("SetAppModeExecutor unit tests", function() {
     }
   });
 
-
-
   it.skip("can apply a valid SetAppModeConfig and files array", function() {
     var exec = new SetAppModeExecutor(VALID_SETAPPMODECONFIG_EXPECTED_DEFAULT, VALID_FILES_ARRAY_DEFAULT_CONFIG);
     exec.apply();

@@ -1,6 +1,6 @@
 "use strict";
 
-describe("SetAppModeConfig unit tests", function() {
+describe("SetAppModeConfig", function() {
   var should = require("should");
   var SetAppModeConfig = require("../../lib/set_app_mode_config");
 

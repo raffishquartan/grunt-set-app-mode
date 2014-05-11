@@ -1,6 +1,6 @@
 "use strict";
 
-describe("SetAppModeExecutor unit tests", function() {
+describe("SetAppModeExecutor", function() {
   var should = require("should");
   var grunt; // require before each test to ensure it is fresh
   var SetAppModeConfig = require("../../lib/set_app_mode_config");

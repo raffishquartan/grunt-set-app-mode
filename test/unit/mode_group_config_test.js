@@ -8,7 +8,7 @@
 
 "use strict";
 
-describe("ModeGroupGonfig unit tests", function() {
+describe("ModeGroupGonfig", function() {
   var should = require("should");
   var ModeGroupConfig = require("../../lib/mode_group_config");
 

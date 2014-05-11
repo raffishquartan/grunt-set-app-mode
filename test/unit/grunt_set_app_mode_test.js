@@ -3,7 +3,8 @@
 describe("end-to-end tests (grunt)", function() {
   var should = require("should");
   var grunt = require("grunt");
-  var GruntSetAppMode = require("../lib/grunt_set_app_mode");
+  var GruntSetAppMode = require("../../lib/grunt_set_app_mode");
+
 
 
   it("registers itself with grunt", function() {

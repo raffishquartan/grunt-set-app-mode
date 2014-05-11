@@ -1,5 +1,9 @@
 # grunt-set-app-mode
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
+[![NPM](https://nodei.co/npm/grunt-set-app-mode.png?downloads=true&stars=true)](https://nodei.co/npm/grunt-set-app-mode/)
+
 > Deploys run mode-specific files, e.g. src/config.staging.js to build/config.js
 
 It is a problem if code for one run mode (dev) runs in another (prod). At the very least, the databases and user credentials can be different. One way of avoiding this problem is using run mode-specific configuration files which specify the relevant details.

@@ -34,7 +34,7 @@ describe("SetAppModeExecutor", function() {
 
 
   var SRC_MODE_FILENAME_DEFAULT = PREFIX_DEFAULT + ".{{MODE}}.js";
-  var SRC_MODE_GLOB_DEFAULT = SRC_DIR + "/" + SRC_MODE_FILENAME_DEFAULT;
+  var SRC_MODE_GLOB_DEFAULT = path.join(SRC_DIR, SRC_MODE_FILENAME_DEFAULT);
   var FILES_ARRAY_DEFAULT = [{
     orig: {
       src: SRC_MODE_GLOB_DEFAULT,
@@ -46,9 +46,9 @@ describe("SetAppModeExecutor", function() {
 
   var SRC_MODE_FILENAME_METALS_A = PREFIX_METAL_A + ".{{MODE}}.js";
   var SRC_MODE_FILENAME_METALS_B = PREFIX_METAL_B + ".{{MODE}}.js";
-  var SRC_MODE_GLOB_METALS_A = SRC_DIR + "/" + SRC_MODE_FILENAME_METALS_A;
-  var SRC_MODE_GLOB_METALS_B = SRC_DIR + "/" + SRC_MODE_FILENAME_METALS_B;
-  var FILES_ARRAY_METAL_MODE = [{
+  var SRC_MODE_GLOB_METALS_A = path.join(SRC_DIR, SRC_MODE_FILENAME_METALS_A);
+  var SRC_MODE_GLOB_METALS_B = path.join(SRC_DIR, SRC_MODE_FILENAME_METALS_B);
+  var FILES_ARRAY_METAL = [{
     orig: {
       src: SRC_MODE_GLOB_METALS_A,
       dest: DEST_DIR
@@ -59,7 +59,7 @@ describe("SetAppModeExecutor", function() {
       dest: DEST_DIR
     }
   }];
-  var MODE_GROUP_CONFIG_COLLECTION_METAL = new ModeGroupConfigCollection(FILES_ARRAY_METAL_MODE,
+  var MODE_GROUP_CONFIG_COLLECTION_METAL = new ModeGroupConfigCollection(FILES_ARRAY_METAL,
     EXPECTED_MODES_METAL);
 
   var EMPTY_FILES_ARRAY = [];
@@ -97,8 +97,7 @@ describe("SetAppModeExecutor", function() {
       mode_groups: MODE_GROUP_CONFIG_COLLECTION_DEFAULT
     });
     exec.apply_all();
-    Validators.check_final_result(EXPECTED_MODES_DEFAULT,
-      PREFIX_DEFAULT, MODE_DEFAULT, DEST_DIR, SRC_DIR);
+    Validators.check_final_result(EXPECTED_MODES_DEFAULT, PREFIX_DEFAULT, MODE_DEFAULT, DEST_DIR, SRC_DIR);
   });
 
   it("can apply a valid SetAppModeConfig and multi-element files array", function() {
@@ -107,10 +106,8 @@ describe("SetAppModeExecutor", function() {
       mode_groups: MODE_GROUP_CONFIG_COLLECTION_METAL
     });
     exec.apply_all();
-    Validators.check_final_result(EXPECTED_MODES_METAL,
-      PREFIX_METAL_A, MODE_METAL, DEST_DIR, SRC_DIR);
-    Validators.check_final_result(EXPECTED_MODES_METAL,
-      PREFIX_METAL_B, MODE_METAL, DEST_DIR, SRC_DIR);
+    Validators.check_final_result(EXPECTED_MODES_METAL, PREFIX_METAL_A, MODE_METAL, DEST_DIR, SRC_DIR);
+    Validators.check_final_result(EXPECTED_MODES_METAL, PREFIX_METAL_B, MODE_METAL, DEST_DIR, SRC_DIR);
   });
 
   it("throws error when configuration files array is undefined (falsy)", function() {

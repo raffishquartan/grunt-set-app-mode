@@ -19,6 +19,10 @@ describe("SetAppModeExecutor", function() {
   var PREFIX_METAL_A = "mode";
   var PREFIX_METAL_B = "other";
 
+  var MODE_TRAILING = "aaa";
+  var EXPECTED_MODES_TRAILING = [ "aaa", "bbb", "ccc" ];
+  var PREFIX_TRAILING = "trailing-mode.js"
+
   var DEST_DIR = "test/tmp";
   var SRC_DIR = "test/src"
 
@@ -32,6 +36,10 @@ describe("SetAppModeExecutor", function() {
     mode: MODE_METAL
   });
 
+  var CONFIG_TRAILING = new SetAppModeConfig({
+    expected_modes: EXPECTED_MODES_TRAILING,
+    mode: MODE_TRAILING
+  });
 
   var SRC_MODE_FILENAME_DEFAULT = PREFIX_DEFAULT + ".{{MODE}}.js";
   var SRC_MODE_GLOB_DEFAULT = path.join(SRC_DIR, SRC_MODE_FILENAME_DEFAULT);
@@ -62,6 +70,17 @@ describe("SetAppModeExecutor", function() {
   var MODE_GROUP_CONFIG_COLLECTION_METAL = new ModeGroupConfigCollection(FILES_ARRAY_METAL,
     EXPECTED_MODES_METAL);
 
+  var SRC_MODE_FILENAME_TRAILING = PREFIX_TRAILING + ".{{MODE}}";
+  var SRC_MODE_GLOB_TRAILING = path.join(SRC_DIR, SRC_MODE_FILENAME_TRAILING);
+  var FILES_ARRAY_TRAILING = [{
+    orig: {
+      src: SRC_MODE_GLOB_TRAILING,
+      dest: DEST_DIR
+    }
+  }];
+  var MODE_GROUP_CONFIG_COLLECTION_TRAILING = new ModeGroupConfigCollection(FILES_ARRAY_TRAILING,
+    EXPECTED_MODES_TRAILING);
+
   var EMPTY_FILES_ARRAY = [];
 
   var UNDEFINED_FILES_ARRAY = undefined;
@@ -89,6 +108,11 @@ describe("SetAppModeExecutor", function() {
       grunt.file.copy(src_filepath_a, dest_filepath_a);
       grunt.file.copy(src_filepath_b, dest_filepath_b);
     });
+    EXPECTED_MODES_TRAILING.forEach(function(mode) {
+      var src_filepath = SRC_MODE_GLOB_TRAILING.replace("{{MODE}}", mode);
+      var dest_filepath = path.join(DEST_DIR, SRC_MODE_FILENAME_TRAILING.replace("{{MODE}}", mode));
+      grunt.file.copy(src_filepath, dest_filepath);
+    });
   });
 
   it("can apply a valid SetAppModeConfig and files array", function() {
@@ -108,6 +132,15 @@ describe("SetAppModeExecutor", function() {
     exec.apply_all();
     Validators.check_final_result(EXPECTED_MODES_METAL, PREFIX_METAL_A, MODE_METAL, DEST_DIR, SRC_DIR);
     Validators.check_final_result(EXPECTED_MODES_METAL, PREFIX_METAL_B, MODE_METAL, DEST_DIR, SRC_DIR);
+  });
+
+  it("can apply a ModeGroupConfig with a trailing {{MODE}}", function() {
+    var exec = new SetAppModeExecutor({
+      config: CONFIG_TRAILING,
+      mode_groups: MODE_GROUP_CONFIG_COLLECTION_TRAILING
+    });
+    exec.apply_all();
+    Validators.check_final_result(EXPECTED_MODES_TRAILING, PREFIX_TRAILING, MODE_TRAILING, DEST_DIR, SRC_DIR);
   });
 
   it("throws error when configuration files array is undefined (falsy)", function() {

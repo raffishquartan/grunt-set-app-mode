@@ -55,7 +55,9 @@ grunt.initConfig({
 });
 ```
 
-Note that you must use the "File Array" format ([details here](http://gruntjs.com/configuring-tasks#files-array-format)) to specify the location of the run mode-specific files and their destination directory. The processed Grunt task files property is not used in the code because Grunt cannot easily glob across files with "{{MODE}}".
+Note that you must use the "File Array" format ([details here](http://gruntjs.com/configuring-tasks#files-array-format)) to specify the location of the run mode-specific files and their destination directory. The processed Grunt task files property is not used in the code because Grunt cannot easily glob across files with `{{MODE}}`.
+
+NB: the `{{MODE}}` placeholder must always be preceded by a `.`. Trailing placeholders are allowed.
 
 ### Options
 
@@ -91,12 +93,20 @@ grunt.initConfig({
 
 ## Contributing
 
-
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+### Code smells
+
+The following are bad, please feel free to fix them yourself :)
+
+- The placeholder string `{{MODE}}` is hard coded, and transformations from mode glob strings to (standard) glob strings, source files or the destination file name are hacky and messy. These strings should probably be a class
+-- Relatedly, the `ModeGroupConfig` accessors are hideous
+- `SetAppModeExecutor.apply` should be private to `SetAppModeExecutor`
 
 
 ## Release History
 - _0.1.0_ - Initial release
+- _0.1.1_ - Trailing placeholders allowed, `{{MODE}}` must still be prefixed by a `.`
 
 ## License
 

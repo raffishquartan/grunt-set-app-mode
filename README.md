@@ -2,7 +2,6 @@
 
 [![NPM version](https://badge.fury.io/js/grunt-set-app-mode.svg)](http://badge.fury.io/js/grunt-set-app-mode)
 [![Build Status](https://travis-ci.org/cfogelberg/grunt-set-app-mode.svg?branch=master)](https://travis-ci.org/cfogelberg/grunt-set-app-mode)
-
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [![NPM](https://nodei.co/npm/grunt-set-app-mode.png?downloads=true&stars=true)](https://nodei.co/npm/grunt-set-app-mode/)

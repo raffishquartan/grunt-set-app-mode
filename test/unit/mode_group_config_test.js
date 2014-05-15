@@ -17,18 +17,18 @@ describe("ModeGroupGonfig", function() {
 
   var TARGET_MODE = "dev";
   var EXPECTED_MODES = [ TARGET_MODE, "staging", "prod" ];
-  var SRC_GLOB_WITH_MODE = "test/src/config.{{MODE}}.js";
+  var SRC_MODE_GLOB = "test/src/config.{{MODE}}.js";
   var SRC_NON_EXISTENT_GLOB = "src/config.js";
   var SRC_FILES_DO_NOT_EXIST_GLOB = "src/foo.{{MODE}}.js";
   var DEST_DIR = "test/tmp";
 
   var VALID_MODE_GROUP_CONFIG = {
-    src: SRC_GLOB_WITH_MODE,
+    src: SRC_MODE_GLOB,
     dest: DEST_DIR
   };
 
   var MISSING_DEST_MODE_GROUP_CONFIG = {
-    src: SRC_GLOB_WITH_MODE
+    src: SRC_MODE_GLOB
   };
 
   var MISSING_SRC_MODE_GROUP_CONFIG = {
@@ -53,17 +53,17 @@ describe("ModeGroupGonfig", function() {
 
   it("returns the correct source glob", function() {
     var mgc = new ModeGroupConfig(VALID_MODE_GROUP_CONFIG, EXPECTED_MODES);
-    mgc.get_src_glob().should.equal(SRC_GLOB_WITH_MODE.replace("{{MODE}}", "*"));
+    mgc.get_src_glob().should.equal(SRC_MODE_GLOB.replace("{{MODE}}", "*"));
   });
 
   it("returns the correct src filepath", function() {
     var mgc = new ModeGroupConfig(VALID_MODE_GROUP_CONFIG, EXPECTED_MODES);
-    mgc.get_src_filepath(TARGET_MODE).should.equal(SRC_GLOB_WITH_MODE.replace("{{MODE}}", TARGET_MODE));
+    mgc.get_src_filepath(TARGET_MODE).should.equal(SRC_MODE_GLOB.replace("{{MODE}}", TARGET_MODE));
   });
 
   it("returns the correct src filename", function() {
     var mgc = new ModeGroupConfig(VALID_MODE_GROUP_CONFIG, EXPECTED_MODES);
-    var src_filename = path.basename(SRC_GLOB_WITH_MODE.replace("{{MODE}}", TARGET_MODE));
+    var src_filename = path.basename(SRC_MODE_GLOB.replace("{{MODE}}", TARGET_MODE));
     mgc.get_src_filename(TARGET_MODE).should.equal(src_filename);
   });
 
@@ -74,13 +74,13 @@ describe("ModeGroupGonfig", function() {
 
   it("returns the correct destination filename", function() {
     var mgc = new ModeGroupConfig(VALID_MODE_GROUP_CONFIG, EXPECTED_MODES);
-    var dest_filepath = path.join(DEST_DIR, path.basename(SRC_GLOB_WITH_MODE.replace(".{{MODE}}.", ".")));
+    var dest_filepath = path.join(DEST_DIR, path.basename(SRC_MODE_GLOB.replace(".{{MODE}}", "")));
     mgc.get_dest_filepath(TARGET_MODE).should.equal(dest_filepath);
   });
 
   it("returns the correct destination glob", function() {
     var mgc = new ModeGroupConfig(VALID_MODE_GROUP_CONFIG, EXPECTED_MODES);
-    var dest_filepath = path.join(DEST_DIR, path.basename(SRC_GLOB_WITH_MODE.replace("{{MODE}}", "*")));
+    var dest_filepath = path.join(DEST_DIR, path.basename(SRC_MODE_GLOB.replace("{{MODE}}", "*")));
     mgc.get_dest_glob(TARGET_MODE).should.equal(dest_filepath);
   });
 

@@ -35,5 +35,5 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask("build", ["clean:total", "copy:build", "set_app_mode"]);
+  grunt.registerTask("build", ["clean", "copy", "set_app_mode"]);
 };

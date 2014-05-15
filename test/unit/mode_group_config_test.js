@@ -21,6 +21,7 @@ describe("ModeGroupGonfig", function() {
   var SRC_NON_EXISTENT_GLOB = "src/config.js";
   var SRC_FILES_DO_NOT_EXIST_GLOB = "src/foo.{{MODE}}.js";
   var DEST_DIR = "test/tmp";
+  var DEST_FILE = "test/src/config.dev.js"
 
   var VALID_MODE_GROUP_CONFIG = {
     src: SRC_MODE_GLOB,
@@ -38,6 +39,11 @@ describe("ModeGroupGonfig", function() {
   var SOURCE_FILE_DOES_NOT_EXIST_CONFIG = {
     src: SRC_FILES_DO_NOT_EXIST_GLOB,
     dest: DEST_DIR
+  };
+
+  var DESTINATION_IS_A_FILE_CONFIG = {
+    src: SRC_MODE_GLOB,
+    dest: DEST_FILE
   };
 
   var SOURCE_NON_EXISTENT_GLOB = {
@@ -99,6 +105,12 @@ describe("ModeGroupGonfig", function() {
   it("throws error src does not contain '{{MODE}}'", function() {
     (function() {
       var mgc = new ModeGroupConfig(SRC_NON_EXISTENT_GLOB, EXPECTED_MODES);
+    }).should.throw();
+  });
+
+  it("throws error when destination is a file not a directory", function() {
+    (function() {
+      var mgc = new ModeGroupConfig(DESTINATION_IS_A_FILE_CONFIG, EXPECTED_MODES);
     }).should.throw();
   });
 });

@@ -121,7 +121,7 @@ describe("SetAppModeExecutor", function() {
       mode_groups: MODE_GROUP_CONFIG_COLLECTION_DEFAULT
     });
     exec.apply_all();
-    Validators.check_final_result(EXPECTED_MODES_DEFAULT, PREFIX_DEFAULT, MODE_DEFAULT, DEST_DIR, SRC_DIR);
+    Validators.check_final_result(EXPECTED_MODES_DEFAULT, SRC_MODE_FILENAME_DEFAULT, MODE_DEFAULT, DEST_DIR, SRC_DIR);
   });
 
   it("can apply a valid SetAppModeConfig and multi-element files array", function() {
@@ -130,8 +130,10 @@ describe("SetAppModeExecutor", function() {
       mode_groups: MODE_GROUP_CONFIG_COLLECTION_METAL
     });
     exec.apply_all();
-    Validators.check_final_result(EXPECTED_MODES_METAL, PREFIX_METAL_A, MODE_METAL, DEST_DIR, SRC_DIR);
-    Validators.check_final_result(EXPECTED_MODES_METAL, PREFIX_METAL_B, MODE_METAL, DEST_DIR, SRC_DIR);
+    Validators.check_final_result(EXPECTED_MODES_METAL, SRC_MODE_FILENAME_METALS_A, MODE_METAL, DEST_DIR,
+      SRC_DIR);
+    Validators.check_final_result(EXPECTED_MODES_METAL, SRC_MODE_FILENAME_METALS_B, MODE_METAL, DEST_DIR,
+      SRC_DIR);
   });
 
   it("can apply a ModeGroupConfig with a trailing {{MODE}}", function() {
@@ -140,7 +142,8 @@ describe("SetAppModeExecutor", function() {
       mode_groups: MODE_GROUP_CONFIG_COLLECTION_TRAILING
     });
     exec.apply_all();
-    Validators.check_final_result(EXPECTED_MODES_TRAILING, PREFIX_TRAILING, MODE_TRAILING, DEST_DIR, SRC_DIR);
+    Validators.check_final_result(EXPECTED_MODES_TRAILING, SRC_MODE_FILENAME_TRAILING, MODE_TRAILING, DEST_DIR,
+      SRC_DIR);
   });
 
   it("throws error when configuration files array is undefined (falsy)", function() {

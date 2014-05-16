@@ -1,4 +1,12 @@
-module.exports = function(grunt) {;
+/*
+ * grunt-set-app-mode
+ * https://github.com/cfogelberg/grunt-set-app-mode
+ *
+ * Copyright (c) 2014 Christo Fogelberg
+ * Licensed under the MIT license.
+ */
+
+ module.exports = function(grunt) {
 
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 

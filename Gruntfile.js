@@ -12,6 +12,12 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    clean: {
+      all: {
+        src: [ "test/tmp", "test/coverage.html", "**/*~", "**/.*~" ]
+      }
+    },
+
     jshint: {
       all: [ "test/**/*.js", "tasks/**/*.js", "lib/**/*.js" ],
       options: {
@@ -46,6 +52,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadTasks("tasks");
+  grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-mocha-test");
   grunt.registerTask("test", ["jshint", "mochaTest"]);

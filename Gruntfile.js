@@ -25,10 +25,25 @@ module.exports = function(grunt) {
       test: {
         options: {
           reporter: "spec",
-          clearRequireCache: true
+          clearRequireCache: true,
+          require: "test/blanket"
         },
         src: ["test/**/*.js"]
       },
+      coverage: {
+        options: {
+          reporter: "html-cov",
+          quiet: true,
+          captureFile: "test/coverage.html"
+        },
+        src: ["test/**/*.js"]
+      },
+      "travis-cov": {
+        options: {
+          reporter: "travis-cov"
+        },
+        src: ["test/**/*.js"]
+      }
     }
   });
 

@@ -33,7 +33,14 @@ describe("ModeGroupConfigCollection", function() {
     }
   }
   var VALID_FILES_ARRAY_METAL = [ MODE_GROUP_CONFIG_A, MODE_GROUP_CONFIG_B ];
+
   var EMPTY_FILES_ARRAY = [];
+
+  var MODE_GROUP_NO_ORIG = {
+    src: SRC_DIR + "/other.{{MODE}}.js",
+    dest: DEST_DIR
+  };
+  var MODE_GROUP_NO_ORIG_ARRAY = [ MODE_GROUP_CONFIG_A, MODE_GROUP_NO_ORIG ];
 
 
 
@@ -63,4 +70,10 @@ describe("ModeGroupConfigCollection", function() {
       var exec = new ModeGroupConfigCollection(EMPTY_FILES_ARRAY, EXPECTED_MODES_METAL);
     }).should.throw();
   });
+
+  it("throws error when files array has no 'orig' property", function() {
+    (function() {
+      var mgcc = new ModeGroupConfigCollection(MODE_GROUP_NO_ORIG_ARRAY, EXPECTED_MODES_METAL);
+    }).should.throw();
+  })
 });

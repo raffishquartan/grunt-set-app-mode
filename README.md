@@ -106,7 +106,7 @@ The following are bad, please feel free to fix them yourself :)
 
 ## Release History
 - _0.1.0_ - Initial release
-- _0.1.1_ - Trailing placeholders allowed, `{{MODE}}` must still be prefixed by a `.`
+- _0.1.1_ - Trailing `{{MODE}}` placeholders allowed (but must still be prefixed by a `.`)
 
 ## License
 

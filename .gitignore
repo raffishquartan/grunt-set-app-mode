@@ -5,4 +5,5 @@ tmp
 .settings
 *.sublime-workspace
 *~
+test/coverage.html
 

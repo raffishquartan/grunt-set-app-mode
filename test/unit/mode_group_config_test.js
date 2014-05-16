@@ -17,8 +17,10 @@ describe("ModeGroupGonfig", function() {
 
   var TARGET_MODE = "dev";
   var EXPECTED_MODES = [ TARGET_MODE, "staging", "prod" ];
+  var EXPECTED_MODES_ONE_WRONG = [ "bronze", "silver", "GOLD" ];
   var SRC_MODE_GLOB = "test/src/config.{{MODE}}.js";
   var SRC_NON_EXISTENT_GLOB = "src/config.js";
+  var SRC_MODE_GLOB_NO_FLAG = "src/config.MODE.js";
   var SRC_FILES_DO_NOT_EXIST_GLOB = "src/foo.{{MODE}}.js";
   var DEST_DIR = "test/tmp";
   var DEST_FILE = "test/src/config.dev.js"
@@ -50,6 +52,11 @@ describe("ModeGroupGonfig", function() {
     src: SRC_NON_EXISTENT_GLOB,
     dest: DEST_DIR
   };
+
+  var NO_MODE_FLAG_MODE_GROUP_CONFIG = {
+    src: SRC_MODE_GLOB_NO_FLAG,
+    dest: DEST_DIR
+  }
 
 
 
@@ -113,4 +120,16 @@ describe("ModeGroupGonfig", function() {
       var mgc = new ModeGroupConfig(DESTINATION_IS_A_FILE_CONFIG, EXPECTED_MODES);
     }).should.throw();
   });
+
+  it("throws error when src mode glob does not contain {{MODE}}", function() {
+    (function() {
+      var mgc = new ModeGroupConfig(VALID_MODE_GROUP_CONFIG, EXPECTED_MODES_ONE_WRONG);
+    }).should.throw();
+  });
+
+  it("throws error when source file not present for one or more expected modes", function() {
+    (function() {
+      var mgc = new ModeGroupConfig(NO_MODE_FLAG_MODE_GROUP_CONFIG, EXPECTED_MODES);
+    }).should.throw();
+  })
 });

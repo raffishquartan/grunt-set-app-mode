@@ -1,3 +1,6 @@
+// Allow indirectly-executed (should-executed) function literals to pass jshint IIFE warning:
+/*jshint -W068 */
+
 "use strict";
 
 describe("SetAppModeConfig", function() {
@@ -54,7 +57,7 @@ describe("SetAppModeConfig", function() {
 
   it("throws an Error when mode is not set", function() {
     (function() {
-      var config = new SetAppModeConfig(NO_MODE_CONFIGURATION)
+      var config = new SetAppModeConfig(NO_MODE_CONFIGURATION);
     }).should.throw();
   });
 

@@ -1,3 +1,8 @@
+// Allow indirectly-executed (should-executed) function literals to pass jshint IIFE warning:
+/*jshint -W068 */
+// Disable warning about initialising a variable (in this case UNDEFINED_FILES_ARRAY) to undefined
+/*jshint -W080 */
+
 "use strict";
 
 describe("SetAppModeExecutor", function() {
@@ -21,10 +26,10 @@ describe("SetAppModeExecutor", function() {
 
   var MODE_TRAILING = "aaa";
   var EXPECTED_MODES_TRAILING = [ "aaa", "bbb", "ccc" ];
-  var PREFIX_TRAILING = "trailing-mode.js"
+  var PREFIX_TRAILING = "trailing-mode.js";
 
   var DEST_DIR = "test/tmp";
-  var SRC_DIR = "test/src"
+  var SRC_DIR = "test/src";
 
   var CONFIG_DEFAULT = new SetAppModeConfig({
     expected_modes: EXPECTED_MODES_DEFAULT,

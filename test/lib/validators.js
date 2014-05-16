@@ -8,7 +8,7 @@ function load_file_contents(filepath) {
   else {
     throw new Error(filepath + " does not exist");
   }
-};
+}
 
 var Validators = {
   check_final_result: function(expected_modes, src_mode_glob, mode, dest_dir, src_dir) {

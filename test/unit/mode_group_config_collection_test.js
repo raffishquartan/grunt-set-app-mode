@@ -6,12 +6,16 @@
  * Licensed under the MIT license.
  */
 
+// Allow indirectly-executed (should-executed) function literals to pass jshint IIFE warning:
+/*jshint -W068 */
+
 "use strict";
 
 describe("ModeGroupConfigCollection", function() {
   var should = require("should");
   var ModeGroupConfig = require("../../lib/mode_group_config");
   var ModeGroupConfigCollection = require("../../lib/mode_group_config_collection");
+
 
 
   var SRC_DIR = "test/src";
@@ -25,13 +29,13 @@ describe("ModeGroupConfigCollection", function() {
       src: SRC_DIR + "/mode.{{MODE}}.js",
       dest: DEST_DIR
     }
-  }
+  };
   var MODE_GROUP_CONFIG_B  = {
     orig: {
       src: SRC_DIR + "/other.{{MODE}}.js",
       dest: DEST_DIR
     }
-  }
+  };
   var VALID_FILES_ARRAY_METAL = [ MODE_GROUP_CONFIG_A, MODE_GROUP_CONFIG_B ];
 
   var EMPTY_FILES_ARRAY = [];
@@ -67,7 +71,7 @@ describe("ModeGroupConfigCollection", function() {
 
   it("throws error when files array is empty", function() {
     (function() {
-      var exec = new ModeGroupConfigCollection(EMPTY_FILES_ARRAY, EXPECTED_MODES_METAL);
+      var mgcc = new ModeGroupConfigCollection(EMPTY_FILES_ARRAY, EXPECTED_MODES_METAL);
     }).should.throw();
   });
 
@@ -75,5 +79,5 @@ describe("ModeGroupConfigCollection", function() {
     (function() {
       var mgcc = new ModeGroupConfigCollection(MODE_GROUP_NO_ORIG_ARRAY, EXPECTED_MODES_METAL);
     }).should.throw();
-  })
+  });
 });

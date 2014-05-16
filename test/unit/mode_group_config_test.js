@@ -6,6 +6,9 @@
  * Licensed under the MIT license.
  */
 
+// Allow indirectly-executed (should-executed) function literals to pass jshint IIFE warning:
+/*jshint -W068 */
+
 "use strict";
 
 describe("ModeGroupGonfig", function() {
@@ -22,7 +25,7 @@ describe("ModeGroupGonfig", function() {
   var SRC_NON_EXISTENT_GLOB = "src/config.js";
   var SRC_FILES_DO_NOT_EXIST_GLOB = "src/foo.{{MODE}}.js";
   var DEST_DIR = "test/tmp";
-  var DEST_FILE = "test/src/config.dev.js"
+  var DEST_FILE = "test/src/config.dev.js";
 
   var VALID_MODE_GROUP_CONFIG = {
     src: SRC_MODE_GLOB,

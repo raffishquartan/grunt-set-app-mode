@@ -47,7 +47,7 @@ describe("ModeGroupGonfig", function() {
     dest: DEST_FILE
   };
 
-  var SOURCE_NON_EXISTENT_GLOB = {
+  var SOURCE_NON_EXISTENT_GLOB_CONFIG = {
     src: SRC_NON_EXISTENT_GLOB,
     dest: DEST_DIR
   };
@@ -105,7 +105,7 @@ describe("ModeGroupGonfig", function() {
 
   it("throws error src does not contain '{{MODE}}'", function() {
     (function() {
-      var mgc = new ModeGroupConfig(SRC_NON_EXISTENT_GLOB, EXPECTED_MODES);
+      var mgc = new ModeGroupConfig(SOURCE_NON_EXISTENT_GLOB_CONFIG, EXPECTED_MODES);
     }).should.throw();
   });
 

@@ -1,7 +1,7 @@
 {
   "name": "grunt-set-app-mode",
   "description": "Deploys run mode-specific files, e.g. src/config.staging.js to build/config.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/cfogelberg/grunt-set-app-mode",
   "author": {
     "name": "Christo Fogelberg",

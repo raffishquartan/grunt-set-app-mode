@@ -13,9 +13,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     jshint: {
-      all: [
-        "**/*.js"
-      ],
+      all: [ "test/**/*.js", "tasks/**/*.js", "lib/**/*.js" ],
       options: {
         jshintrc: ".jshintrc",
       },
@@ -50,6 +48,6 @@ module.exports = function(grunt) {
   grunt.loadTasks("tasks");
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-mocha-test");
-  grunt.registerTask("test", ["mochaTest"]);
+  grunt.registerTask("test", ["jshint", "mochaTest"]);
   grunt.registerTask("default", ["test"]);
 };

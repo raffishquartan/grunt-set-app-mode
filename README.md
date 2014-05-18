@@ -104,9 +104,11 @@ The following are bad, please feel free to fix them yourself :)
 - `SetAppModeExecutor.apply` should be private to `SetAppModeExecutor`
 
 
-## Release History
+## Changelog
+
 - _0.1.0_ - Initial release
 - _0.1.1_ - Trailing `{{MODE}}` placeholders allowed (but must still be prefixed by a `.`)
+- _0.1.2_ - Travis CI yaml bug fix, no other changes
 
 ## License
 

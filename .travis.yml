@@ -3,3 +3,7 @@ node_js :
     - "0.10"
 before_script :
     - npm install -g grunt-cli
+deploy:
+  provider: npm
+  on:
+    tags: true

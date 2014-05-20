@@ -14,7 +14,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     clean: {
       all: {
-        src: [ "test/tmp", "test/coverage.html", "**/*~", "**/.*~" ]
+        src: [ "test/tmp", "test/coverage", "**/*~", "**/.*~" ]
       }
     },
 
@@ -34,11 +34,19 @@ module.exports = function(grunt) {
         },
         src: ["test/**/*.js"]
       },
-      coverage: {
+      coverage_html: {
         options: {
           reporter: "html-cov",
           quiet: true,
-          captureFile: "test/coverage.html"
+          captureFile: "test/coverage/coverage.html"
+        },
+        src: ["test/**/*.js"]
+      },
+      "mocha-lcov-reporter": {
+        options: {
+          reporter: "mocha-lcov-reporter",
+          quiet: true,
+          captureFile: "test/coverage/lcov.info"
         },
         src: ["test/**/*.js"]
       },
@@ -48,12 +56,22 @@ module.exports = function(grunt) {
         },
         src: ["test/**/*.js"]
       }
+    },
+
+    coveralls: {
+      options: {
+        force: true
+      },
+      all: {
+        src: "test/coverage/lcov.info"
+      }
     }
   });
 
   grunt.loadTasks("tasks");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-coveralls");
   grunt.loadNpmTasks("grunt-mocha-test");
   grunt.registerTask("test", ["jshint", "mochaTest"]);
   grunt.registerTask("default", ["test"]);

@@ -74,5 +74,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-coveralls");
   grunt.loadNpmTasks("grunt-mocha-test");
   grunt.registerTask("test", ["jshint", "mochaTest"]);
-  grunt.registerTask("default", ["test"]);
+  grunt.registerTask("default", ["clean", "test", "coveralls"]);
 };

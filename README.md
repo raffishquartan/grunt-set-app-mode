@@ -2,6 +2,9 @@
 
 [![NPM version](https://badge.fury.io/js/grunt-set-app-mode.svg)](http://badge.fury.io/js/grunt-set-app-mode)
 [![Build Status](https://travis-ci.org/cfogelberg/grunt-set-app-mode.svg?branch=master)](https://travis-ci.org/cfogelberg/grunt-set-app-mode)
+[![Coverage Status](https://coveralls.io/repos/cfogelberg/grunt-set-app-mode/badge.png)](https://coveralls.io/r/cfogelberg/grunt-set-app-mode)
+[![Dependency status](https://david-dm.org/cfogelberg/grunt-set-app-mode/status.png)](https://david-dm.org/cfogelberg/grunt-set-app-mode#info=dependencies&view=table)
+[![Dev Dependency Status](https://david-dm.org/pimterry/grunt-set-app-mode/dev-status.png)](https://david-dm.org/cfogelberg/grunt-set-app-mode#info=devDependencies&view=table)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [![NPM](https://nodei.co/npm/grunt-set-app-mode.png?downloads=true&stars=true)](https://nodei.co/npm/grunt-set-app-mode/)
@@ -102,7 +105,6 @@ The following are bad, please feel free to fix them yourself :)
 - The placeholder string `{{MODE}}` is hard coded, and transformations from mode glob strings to (standard) glob strings, source files or the destination file name are hacky and messy. These strings should probably be a class
 -- Relatedly, the `ModeGroupConfig` accessors are hideous
 - `SetAppModeExecutor.apply` should be private to `SetAppModeExecutor`
-
 
 ## Changelog
 

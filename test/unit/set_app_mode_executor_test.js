@@ -55,10 +55,10 @@ describe("SetAppModeExecutor", function() {
   });
 
   var SRC_MODE_FILENAME_DEFAULT = PREFIX_DEFAULT + ".{{MODE}}.js";
-  var SRC_MODE_GLOB_DEFAULT = path.join(SRC_DIR, SRC_MODE_FILENAME_DEFAULT);
+  var SRC_MODE_GLOB_ARRAY_DEFAULT = [path.join(SRC_DIR, SRC_MODE_FILENAME_DEFAULT)];
   var FILES_ARRAY_DEFAULT = [{
     orig: {
-      src: SRC_MODE_GLOB_DEFAULT,
+      src: SRC_MODE_GLOB_ARRAY_DEFAULT,
       dest: DEST_DIR
     }
   }];
@@ -67,16 +67,16 @@ describe("SetAppModeExecutor", function() {
 
   var SRC_MODE_FILENAME_METALS_A = PREFIX_METAL_A + ".{{MODE}}.js";
   var SRC_MODE_FILENAME_METALS_B = PREFIX_METAL_B + ".{{MODE}}.js";
-  var SRC_MODE_GLOB_METALS_A = path.join(SRC_DIR, SRC_MODE_FILENAME_METALS_A);
-  var SRC_MODE_GLOB_METALS_B = path.join(SRC_DIR, SRC_MODE_FILENAME_METALS_B);
+  var SRC_MODE_GLOB_ARRAY_METALS_A = [path.join(SRC_DIR, SRC_MODE_FILENAME_METALS_A)];
+  var SRC_MODE_GLOB_ARRAY_METALS_B = [path.join(SRC_DIR, SRC_MODE_FILENAME_METALS_B)];
   var FILES_ARRAY_METAL = [{
     orig: {
-      src: SRC_MODE_GLOB_METALS_A,
+      src: SRC_MODE_GLOB_ARRAY_METALS_A,
       dest: DEST_DIR
     }
   }, {
     orig: {
-      src: SRC_MODE_GLOB_METALS_B,
+      src: SRC_MODE_GLOB_ARRAY_METALS_B,
       dest: DEST_DIR
     }
   }];
@@ -84,10 +84,10 @@ describe("SetAppModeExecutor", function() {
     EXPECTED_MODES_METAL);
 
   var SRC_MODE_FILENAME_TRAILING = PREFIX_TRAILING + ".{{MODE}}";
-  var SRC_MODE_GLOB_TRAILING = path.join(SRC_DIR, SRC_MODE_FILENAME_TRAILING);
+  var SRC_MODE_GLOB_ARRAY_TRAILING = [path.join(SRC_DIR, SRC_MODE_FILENAME_TRAILING)];
   var FILES_ARRAY_TRAILING = [{
     orig: {
-      src: SRC_MODE_GLOB_TRAILING,
+      src: SRC_MODE_GLOB_ARRAY_TRAILING,
       dest: DEST_DIR
     }
   }];
@@ -109,20 +109,20 @@ describe("SetAppModeExecutor", function() {
       grunt.file.delete(DEST_DIR);
     }
     EXPECTED_MODES_DEFAULT.forEach(function(mode) {
-      var src_filepath = SRC_MODE_GLOB_DEFAULT.replace("{{MODE}}", mode);
+      var src_filepath = SRC_MODE_GLOB_ARRAY_DEFAULT[0].replace("{{MODE}}", mode);
       var dest_filepath = path.join(DEST_DIR, SRC_MODE_FILENAME_DEFAULT.replace("{{MODE}}", mode));
       grunt.file.copy(src_filepath, dest_filepath);
     });
     EXPECTED_MODES_METAL.forEach(function(mode) {
-      var src_filepath_a = SRC_MODE_GLOB_METALS_A.replace("{{MODE}}", mode);
+      var src_filepath_a = SRC_MODE_GLOB_ARRAY_METALS_A[0].replace("{{MODE}}", mode);
       var dest_filepath_a = path.join(DEST_DIR, SRC_MODE_FILENAME_METALS_A.replace("{{MODE}}", mode));
-      var src_filepath_b = SRC_MODE_GLOB_METALS_B.replace("{{MODE}}", mode);
+      var src_filepath_b = SRC_MODE_GLOB_ARRAY_METALS_B[0].replace("{{MODE}}", mode);
       var dest_filepath_b = path.join(DEST_DIR, SRC_MODE_FILENAME_METALS_B.replace("{{MODE}}", mode));
       grunt.file.copy(src_filepath_a, dest_filepath_a);
       grunt.file.copy(src_filepath_b, dest_filepath_b);
     });
     EXPECTED_MODES_TRAILING.forEach(function(mode) {
-      var src_filepath = SRC_MODE_GLOB_TRAILING.replace("{{MODE}}", mode);
+      var src_filepath = SRC_MODE_GLOB_ARRAY_TRAILING[0].replace("{{MODE}}", mode);
       var dest_filepath = path.join(DEST_DIR, SRC_MODE_FILENAME_TRAILING.replace("{{MODE}}", mode));
       grunt.file.copy(src_filepath, dest_filepath);
     });

@@ -26,13 +26,13 @@ describe("ModeGroupConfigCollection", function() {
 
   var MODE_GROUP_CONFIG_A = {
     orig: {
-      src: SRC_DIR + "/mode.{{MODE}}.js",
+      src: [SRC_DIR + "/mode.{{MODE}}.js"],
       dest: DEST_DIR
     }
   };
   var MODE_GROUP_CONFIG_B  = {
     orig: {
-      src: SRC_DIR + "/other.{{MODE}}.js",
+      src: [SRC_DIR + "/other.{{MODE}}.js"],
       dest: DEST_DIR
     }
   };

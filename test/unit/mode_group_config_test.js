@@ -24,6 +24,7 @@ describe("ModeGroupGonfig", function() {
   var SRC_MODE_GLOB_ARRAY = ["test/src/config.{{MODE}}.js"];
   var SRC_NON_EXISTENT_GLOB_ARRAY = ["src/config.js"];
   var SRC_FILES_DO_NOT_EXIT_GLOB_ARRAY = ["src/foo.{{MODE}}.js"];
+  var WRONG_TYPE_SRC_PROPERTY = { field: SRC_MODE_GLOB_ARRAY };
   var DEST_DIR = "test/tmp";
   var DEST_FILE = "test/src/config.dev.js";
 
@@ -37,6 +38,11 @@ describe("ModeGroupGonfig", function() {
   };
 
   var MISSING_SRC_MODE_GROUP_CONFIG = {
+    dest: DEST_DIR
+  };
+
+  var WRONG_TYPE_SRC_MODE_GROUP_CONFIG = {
+    src: WRONG_TYPE_SRC_PROPERTY,
     dest: DEST_DIR
   };
 
@@ -103,6 +109,12 @@ describe("ModeGroupGonfig", function() {
   it("throws error when configuration src is missing", function() {
     (function() {
       var mgc = new ModeGroupConfig(MISSING_SRC_MODE_GROUP_CONFIG, EXPECTED_MODES);
+    }).should.throw();
+  });
+
+  it("throws error when configuration src is wrong type", function() {
+    (function() {
+      var mgc = new ModeGroupConfig(WRONG_TYPE_SRC_MODE_GROUP_CONFIG, EXPECTED_MODES);
     }).should.throw();
   });
 

@@ -112,6 +112,7 @@ The following are bad, please feel free to fix them yourself :)
 - _0.1.1_ - Trailing `{{MODE}}` placeholders allowed (but must still be prefixed by a `.`)
 - _0.1.2_ - Travis CI yaml bug fix
 - _0.1.3_ - Travis deploy-on-tag, Grunt orig.src-is-array (was expecting string) bug fix
+- _0.1.4_ - Dev dependencies brought up to date
 
 ## License
 
